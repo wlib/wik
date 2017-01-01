@@ -21,9 +21,13 @@ Pretty easy, you only need to have Ruby installed.
 ## Usage
 
 `wik "hello, world!"` - Automatically handle everything
+
 `wik -s keyword` - Search Wikipedia
-`wik -f topic` - Find a list of available pages about a topuc
+
+`wik -f topic` - Find a list of available pages about a topic
+
 `wik -v "page name"` - View "page name"
+
 `wik -d "page name"` - Get a short description of "page name"
 
 ## Contribute
