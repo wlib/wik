@@ -1,0 +1,41 @@
+#!/usr/bin/env ruby
+# Wik - Quick and easy Wikipedia searches
+# Daniel Ethridge
+
+require "wik"
+include Wik
+require "wik/version"
+
+# 'argv' will be the lowercase version of 'ARGV', this helps for argument matching
+argv = ARGV.map(&:downcase)
+
+# If there are no arguments, display a message to help you remember what the program does
+if ARGV.length == 0
+  puts "Try to tell me what you need...`wik \"wondering\"`"
+  exit
+end
+
+# Argument "parser" if you want to call it that
+case argv[0]
+  when "--help", "-h"
+    puts help
+    exit
+  when "--version", "-v"
+    puts version
+    exit
+  when "--search", "-s"
+    search(ARGV[1..-1])
+    exit
+  when "--find", "-f"
+    find(ARGV[1..-1])
+    exit
+  when "--view", "-v"
+    view(ARGV[1..-1])
+    exit
+  when "--describe", "-d"
+    describe(ARGV[1..-1])
+    exit
+  else
+    search(argv[0])
+    exit
+end
