@@ -21,7 +21,7 @@ module Wik
 
   # Do a search by phrase, returns a hash with full search data, but first prints the parsed search data
   def find(phrase, limit=15, snippet=false, display=true)
-    search = phrase.sub( " ", "_" )
+    search = phrase.split.join("_")
     if snippet
       endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&srsearch=#{search}&srlimit=#{limit}"
     else
@@ -52,7 +52,7 @@ module Wik
   # Open Search is a different way to search Wikipedia
   # It returns descriptions automatically and has a more consistent typo-correct
   def search(phrase, limit=5, description=true, display=true)
-    search = phrase.sub( " ", "_" )
+    search = phrase.split.join("_")
     endpoint = "https://en.wikipedia.org/w/api.php?action=opensearch&format=json&search=#{search}&limit=#{limit}"
     hash = get(endpoint)
     results = hash[1]
@@ -78,7 +78,7 @@ module Wik
   def info(titles=nil, ids=nil, display=true)
     if titles
       if titles.is_a?(Array)
-        encoded = titles.join("|").sub( " ", "_" )
+        encoded = titles.join("|").split.join("_")
       elsif titles.is_a?(String)
         encoded = titles
       else
@@ -88,7 +88,7 @@ module Wik
       endpoint = "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=info&inprop=url&titles=#{encoded}&redirects"
     elsif ids
       if ids.is_a?(Array)
-        encoded = ids.join("|").sub( " ", "_" )
+        encoded = ids.join("|").split.join("_")
       elsif ids.is_a?(String)
         encoded = ids
       else
@@ -121,13 +121,20 @@ module Wik
   # Get the entire page of an entry
   def view(title=nil, id=nil)
     if title
-      endpoint = "https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=wikitext&page=#{title}&redirects"
+      encoded = title.split.join("_")
+      endpoint = "https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=wikitext&page=#{encoded}&redirects"
     elsif id
-      endpoint = "https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=wikitext&pageid=#{id}"
+      encoded = title.split.join("_")
+      endpoint = "https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=wikitext&pageid=#{encoded}"
     end
     hash = get(endpoint)
-    content = hash["parse"]["wikitext"].to_s.gsub( '\n', "\n" )
-    system "echo #{content} | less"
+    page = hash["parse"]["wikitext"].to_s.gsub( '\n', "\n" )
+    tmp = Tempfile.new("wik-#{encoded}-")
+    tmp.puts page
+    system "less #{tmp.path}"
+    tmp.close
+    tmp.unlink
+    return hash
   end
 
   # Just give a description of an entry
