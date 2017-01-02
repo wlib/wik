@@ -18,7 +18,7 @@ Pretty easy, you only need to have Ruby installed.
 
 + `sudo gem install wik`
 
-## Usage
+## CLI Usage
 
 `wik "hello, world!"` - Automatically handle everything
 
@@ -30,10 +30,14 @@ Pretty easy, you only need to have Ruby installed.
 
 `wik -d "page name"` - Get a short description of "page name"
 
+## [API](https://github.com/wlib/wik/blob/master/API.md)
+
+Wik has a comfortably simple API, have a look at [API.md](https://github.com/wlib/wik/blob/master/API.md)
+
 ## Contribute
 
 Help me out if you have nothing better to do:
 
 [Fork the project](https://github.com/wlib/wik/fork)
 
-## MIT License
+## [MIT License](https://github.com/wlib/wik/blob/master/LICENSE)
