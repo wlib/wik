@@ -1,5 +1,7 @@
 # Wik - Quick and easy Wikipedia searches
 
+[![Gem Version](https://badge.fury.io/rb/wik.svg)](https://badge.fury.io/rb/wik)
+
 ## Wik makes it quick
 
 With Wik, you have access to all of Wikipedia, in your terminal.
