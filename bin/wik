@@ -6,36 +6,41 @@ require "wik"
 include Wik
 require "wik/version"
 
-# 'argv' will be the lowercase version of 'ARGV', this helps for argument matching
-argv = ARGV.map(&:downcase)
-
 # If there are no arguments, display a message to help you remember what the program does
 if ARGV.length == 0
-  puts "Try to tell me what you need...`wik \"wondering\"`"
+  puts "Try to tell me what you need...`wik wiki`"
   exit
 end
 
+help = """Wik is a quick and easy Wikipedia search tool for the command line, try it out:
+hello, world!   -   Automatically handle everything
+-s keyword      -   Search Wikipedia
+-f topic        -   Find a list of available pages about a topic
+-v api          -   View API
+-d ruby         -   Get a short description of ruby
+"""
+
 # Argument "parser" if you want to call it that
-case argv[0]
+case ARGV[0]
   when "--help", "-h"
     puts help
     exit
-  when "--version", "-v"
-    puts version
+  when "--version", "-V"
+    puts "Wik v#{VERSION}"
     exit
   when "--search", "-s"
-    search(ARGV[1..-1])
+    search(ARGV[1..-1].join(" "))
     exit
   when "--find", "-f"
-    find(ARGV[1..-1])
+    find(ARGV[1..-1].join(" "))
     exit
   when "--view", "-v"
-    view(ARGV[1..-1])
+    view(ARGV[1..-1].join(" "))
     exit
   when "--describe", "-d"
-    describe(ARGV[1..-1])
+    describe(ARGV[1..-1].join(" "))
     exit
   else
-    search(argv[0])
+    handle(ARGV[0..-1].join(" "))
     exit
 end

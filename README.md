@@ -5,7 +5,7 @@
 With Wik, you have access to all of Wikipedia, in your terminal.
 If you have to know something **NOW**, it's as simple as....
 
- ▶ `wik "wondering"`
+ ▶ `wik wiki`
 
 Control is important, so a common action like searching is available with `wik -s keyword`.
 Once you know the name of a page, type `wik -v "page name"` for a full page view.
@@ -20,15 +20,15 @@ Pretty easy, you only need to have Ruby installed.
 
 ## CLI Usage
 
-`wik "hello, world!"` - Automatically handle everything
+`wik hello, world!` - Automatically handle everything
 
 `wik -s keyword` - Search Wikipedia
 
 `wik -f topic` - Find a list of available pages about a topic
 
-`wik -v "page name"` - View "page name"
+`wik -v page name` - View "page name"
 
-`wik -d "page name"` - Get a short description of "page name"
+`wik -d page name` - Get a short description of "page name"
 
 ## [API](https://github.com/wlib/wik/blob/master/API.md)
 

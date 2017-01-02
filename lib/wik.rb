@@ -139,10 +139,11 @@ module Wik
 
   # Just give a description of an entry
   def describe(title=nil, id=nil)
-
+    puts "In development..."
   end
 
   # Automatically handle the process of searching, redirecting, and viewing
-  def handle()
+  def handle(input)
+    search(input)
   end
 end
