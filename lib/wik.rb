@@ -120,10 +120,19 @@ module Wik
 
   # Get the entire page of an entry
   def view(title=nil, id=nil)
+    if title
+      endpoint = "https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=wikitext&page=#{title}&redirects"
+    elsif id
+      endpoint = "https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=wikitext&pageid=#{id}"
+    end
+    hash = get(endpoint)
+    content = hash["parse"]["wikitext"].to_s.gsub( '\n', "\n" )
+    system "echo #{content} | less"
   end
 
   # Just give a description of an entry
   def describe(title=nil, id=nil)
+
   end
 
   # Automatically handle the process of searching, redirecting, and viewing
